@@ -1,25 +1,158 @@
 <!DOCTYPE html>
 <html>
+
+<head>
+  <title>Time Table | 5th sem A section</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: cadetblue;
+    }
+
+    table {
+      width: 50%;
+    }
+
+    th,
+    td {
+      border: 3px solid #02280e;
+      padding: 8px;
+    }
+
+    th {
+      background: rgb(247, 238, 238);
+      color: rgb(198, 60, 60);
+    }
+
+    tr:nth-child(even) {
+      background: rgb(212, 136, 136);
+    }
+
+    tr:nth-child(odd) {
+      background: rgb(145, 41, 41);
+    }
+
+    .highlight {
+      font-weight: bold;
+      color: rgb(37, 37, 141);
+    }
+
+    .highlight1 {
+      font-weight: bold;
+      color: rgb(40, 198, 79);
+    }
+
+    .highlight2 {
+      font-weight: bold;
+      color: rgb(218, 41, 218);
+    }
+  </style>
+</head>
+
+<body>
+  <h1 style="text-align:center;">Class time Table</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Day/Time</th>
+        <th>9:00 - 10:00</th>
+        <th>10:00 - 11:00</th>
+        <th>11:00 - 11:15</th>
+        <th>11:15 - 12:15</th>
+        <th>12:15 - 1:15</th>
+        <th>1:15 - 2:15</th>
+        <th>2:15 - 3:15</th>
+        <th>3:15 - 4:15</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Monday</td>
+        <td>CN</td>
+        <td>TOC</td>
+        <td rowspan="6" class="highlight2">T<br>e<br>a<br> B<br>r<br>e<br>a<br>k</td>
+        <td>Saturday</td>
+        <td>SE & PM</td>
+        <td rowspan="6" class="highlight1">L<br>u<br>n<br>c<br>h<br> B<br>r<br>e<br>a<br>k</td>
+        <td colspan="2" class="highlight2">Physical Activities</td>
+      </tr>
+      <tr>
+        <td>Tuesday</td>
+        <td>USP</td>
+        <td class="highlight">RM&IPR</td>
+        <td>SE & PM</td>
+        <td>TOC</td>
+        <td colspan="2" class="highlight1">Skill Lab</td>
+      </tr>
+      <tr>
+        <td>Wednesday</td>
+        <td>SE & PM</td>
+        <td>TOC</td>
+        <td class="highlight">RM&IPR</td>
+        <td>EVS Studies</td>
+        <td colspan="2" class="highlight1">CN Lab B2 / WT Lab B3</td>
+      </tr>
+      <tr>
+        <td>Thursday</td>
+        <td>SE & PM</td>
+        <td>CN</td>
+        <td>USP</td>
+        <td class="highlight">RM&IPR</td>
+        <td>Mini-Project Work</td>
+        <td>Library Slot / Remedial Class</td>
+      </tr>
+      <tr>
+        <td>Friday</td>
+        <td>USP</td>
+        <td class="highlight">RM&IPR</td>
+        <td>TOC</td>
+        <td>USP</td>
+        <td colspan="2" class="highlight1">CN Lab B3 / WT Lab B1</td>
+      </tr>
+      <tr>
+        <td>Saturday</td>
+        <td>SE & PM</td>
+        <td class="highlight">RM&IPR</td>
+        <td>TOC</td>
+        <td>USP</td>
+        <td>Remedial class</td>
+        <td>Library</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="9" class="highlight3">End of Timetable</td>
+      </tr>
+    </tfoot>
+  </table>
+</body>
+
+</html>
+<!DOCTYPE html>
+<html>
+
 <head>
   <title>Styled HTML Page | CSE</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <h2>Main Heading</h2>
   <h3>Subheading</h3>
   <hr>
   <p>This is a paragraph demonstrating the basic text styling applied by CSS.</p>
-  <div >
-    This is a styled  element with padding and a light border. Inside the div,
-    we can also use <span >span elements</span> that have their own styles, like this bold and orange text.
+  <div>
+    This is a styled element with padding and a light border. Inside the div,
+    we can also use <span>span elements</span> that have their own styles, like this bold and orange text.
   </div>
-  <p>Current time: <time>10:30 AM</time></p>
+  <p>Current time: <time datetime="2020-2-3">sep 24, 2333</time></p>
   <img src="C:\Users\Lenovo\Pictures\233eeaecd1bed2a1daeff443a0f3b814.jpg" alt="Placeholder Image">
   <p>Visit <a href="https://vtucode.in">vtucode.in</a> to learn more about our services.</p>
   <p class="highlight">This paragraph is highlighted with a yellow background.</p>
   <p class="center">This text is centered using a class selector.</p>
   <p id="special-paragraph">This is a special paragraph with unique styles applied through an ID selector.</p>
 </body>
+
 </html>
 * {
   margin: 10;
@@ -33,7 +166,7 @@ h2, h3, p {
 }
 
 h2 {
-  color: #2c3e50;
+  color: #1864b0;
   font-size: 2em;
   margin-bottom: 6px;
 }
@@ -104,6 +237,7 @@ a:hover {
 .highlight{
   background-color: #996bda;
 }
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -241,334 +375,491 @@ a:hover {
 
 </html>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Simple Calculator</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f0f4f8;
-      
-      align-items: center;
-      
-    }
-
-    .calculator {
-      background-color: #3e9038;
-      padding: 30px;
-     
-      width: 320px;
-    }
-
-    h1 {
-      background-color: #1a0505;
-      color: #e7ede6;
-
-   
-     
-     
-    }
-
-    label {
-      display: block;
-    }
-
-    input, select {
-      width: 100%;
-      padding: 8px;
- 
-      
-      border: 5px solid #cf1c1c;    }
-
-    button {
-      width: 100;
-      padding: 10px;
-      background-color: #0077cc;
-      color: rgb(28, 2, 2);
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    button:hover {
-      background-color: #005fa3;
-    }
-
-    #result {
-      margin-top: 15px;
-      color: #333;
-      text-align: center;
-    }
-  </style>
-</head>
-<body><center>
-  <div class="calculator">
-    <h1>Simple Calculator</h1>
-
-    <label>Enter first number:</label>
-    <input type="number" id="num1" />
-
-    <label>Enter second number:</label>
-    <input type="number" id="num2" />
-
-    <label>Select Operation:</label>
-    <select id="operation">
-      <option value="sum">Sum</option>
-      <option value="product">Product</option>
-      <option value="difference">Difference</option>
-      <option value="remainder">Remainder</option>
-      <option value="quotient">Quotient</option>
-      <option value="power">Power</option>
-      <option value="square-root">Square Root</option>
-      <option value="sqrt">Square</option>
-    </select>
-
-    <button onclick="calculate()">Calculate</button>
-
-    <div id="result"></div>
-  </div>
-</body></center>
-  <script>
-    function calculate() {
-      const a = parseFloat(document.getElementById("num1").value);
-      const b = parseFloat(document.getElementById("num2").value);
-      const operation = document.getElementById("operation").value;
-      let result;
-
-      
-
-let op = document.getElementById("operation").value;
-let ans;
-if (op === "sum") ans = a + b;
-else if (op === "product") ans = a * b;
-else if (op === "difference") ans = a - b;
-else if (op === "remainder") ans = a % b;
-else if (op === "quotient") ans = a / b;
-else if (op === "power") ans = a ** b;
-else if (op === "square") ans = a * a;
-else if (op === "sqrt") ans = Math.sqrt(a);
-document.getElementById("result").innerHTML= "Result: " + ans;
-}
-
-  </script>
-</body>
-</html>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Smaller CSS Demo</title>
+  <title>Newspaper</title>
 <style>
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  body {
+  font-family: Arial, sans-serif;
   margin: 0;
-  background: #f5f5f5;
+  padding: 0;
+  background: #f9f9f9;
+  color: #333;
 }
-.container {
-  background: #fff;
-  padding: 10px;
-  text-align: center;
-  
-  
-}
-#list li {
-  background: #2e61b9;
-  margin: 3px;
-  padding: 5px;
-  border-radius: 3px;
-}
-.box {
 
-  height: 80px;
-  background: blue;
-  color: #fff;
-  margin: 10px auto;
- 
+header {
+  background: #db33db;
+  color: white;
+  padding: 1em;
+  display: flex;
+  justify-content: space-between;
 }
-button {
-  padding: 6px 12px;
-  margin: 3px;
-  background: #17afbd;
-  color: #fff;
-  cursor: pointer;
+
+nav a {
+  color: white;
+  margin-left: 1em;
+  text-decoration: none;
+  background-color: rgb(171, 138, 202);
+  font-size: larger;
+}
+
+main {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1em;
+  padding: 1em;
+  color: rgb(46, 15, 145);
+  font-size: medium;
+}
+
+.articles {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding:5em ;
+}
+
+article img {
+           display: inline-block;       /* Keeps the box tight around the image */
+            padding: 20px;               /* Space between image and border */
+            border: 3px solid #333;      /* Border around the box */
+            background-color: #f9f9f9;   /* Background inside the box */
+            box-shadow: 0 8px 8px rgba(203, 105, 105, 0.2); 
+
+height: 10em;
+width:10em;     
+   }
+
+aside {
+  background: #e0a3e8;
+  padding: 1em;
+}
+
+
+
+
+
+.recent-posts {
+  grid-column: span 2;
+  margin-top: 2em;
+}
+
+table {
+  width: 100%;
+  background: white;
+}
+
+.th, td {
+  border: 1px dotted #841d1d;
+  padding: 0.5em;
+  text-align: left;
+}
+
+footer {
+  background: #bf31ce;
+  color: white;
+  text-align: center;
+  padding: 2em;
+  
 }
 </style>
 </head>
 <body>
-<div class="container">
-  <p id="paragraph">This is an existing paragraph.</p>
-  <ul id="list">
-    <li>List item 1</li>
-    <li>List item 2</li>
-  </ul>
-  <div id="box" class="box">Animate me!</div>
-  <button id="appendButton">Append Content</button>
-  <button id="animateButton">Animate Box</button>
-</div>
+  <header>
+    <h1>Newspaper</h1>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="#">Services</a>
+      <a href="#">Marketing</a>
+      <a href="#">Updates</a>
+    </nav>
+  </header>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-$( function ()
- {
-  // Append text and list item
-  $("#appendButton").click(function ()
-   {
-    $("#paragraph").append(" Appended text.");
-    $("#list").append("<li>New appended list item</li>");
-  }
-  );
-  // Animate box
-  $("#animateButton").click(function ()
-   {
-    $("#box").animate({
-      width: "150px",
-      height: "150px",
-      opacity: 0.7
-    }, 800,
-    
-    function () {
-      $(this).css("background-color", "yellow");
-    });
-  });
-});
-</script>
+  <main>
+    <section class="articles">
+      <article>
+        <h2>Article Title 1</h2>
+        <img src="" alt="Article 1" />
+        <p>This is the content of the first article. Meet the 110 year old Sudanese refugee, a fashion icon helping other women achieve financial freedom.</p>
+      
+        <h2>Article Title 2</h2>
+        <img src="https://via.placeholder.com/600x400" alt="Article 2" />
+        <p>This is the content of the second article. See the evolution of modern art in Sudan. Also see outdoor impact on local culture.</p>
+      </article>
+    </section>
+
+    <aside>
+      <h3>Related News</h3>
+      <ul>
+        <li><a href="#">Related News 1</a></li>
+        <li><a href="#">Related News 2</a></li>
+        <li><a href="#">Related News 3</a></li>
+      </ul>
+    </aside>
+
+    <section class="recent-posts">
+      <h3>Recent Posts</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Post Title</th>
+            <th>Date</th>
+            <th>Author</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Post 1</td><td>2024-08-30</td><td>Author 1</td></tr>
+          <tr><td>Post 2</td><td>2024-08-28</td><td>Author 2</td></tr>
+          <tr><td>Post 3</td><td>2024-08-26</td><td>Author 3</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2024 Newspaper. All rights reserved.</p>
+  </footer>
 </body>
 </html>
-
-
 <!DOCTYPE html>
 <html>
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Tool</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+</head>
+<body>
+  <h1>Simple JSON/CSV & Hash Tool</h1>
+
+  <h2>a) JSON → Object</h2>
+  <textarea id="jsonInput"></textarea><br>
+  <button onclick="jsonToObject()">Convert</button>
+
+  <h2>b) JSON → Date</h2>
+  <textarea id="jsonDateInput"></textarea><br>
+  <button onclick="jsonToDate()">Convert</button>
+
+  <h2>c) JSON → CSV</h2>
+  <textarea id="dataInput"></textarea><br>
+  <button onclick="jsonToCsv()">Convert</button>
+
+  
+  <h2>d) String → Hash</h2>
+  <textarea id="hashInput"></textarea><br>
+  <button onclick="makeHash()">Hash</button>
+
+  <pre id="result"></pre>
+
+  <script>
+    function jsonToObject() {
+      document.getElementById('result').textContent =
+        JSON.stringify(JSON.parse(jsonInput.value));
+    }
+
+    function jsonToDate() {
+      document.getElementById('result').textContent =
+        new Date(JSON.parse(jsonDateInput.value).date);
+    }
+
+    function makeHash() {
+      document.getElementById('result').textContent =
+        CryptoJS.SHA256(hashInput.value).toString();
+    }
+
+    function jsonToCsv() {
+      let a = JSON.parse(dataInput.value), h = Object.keys(a[0]);
+      document.getElementById('result').textContent =
+        [h .join(','),    ...a.map  
+                                  ( r => h.map(x => r[x] )   
+                                   .join(',') )
+         ]     
+         .join('\n');
+    }
+
+  
+  </script>
+</body>
+</html>
+<?php
+$counterFile = "counter.txt";
+
+if (!file_exists($counterFile)) {
+    file_put_contents($counterFile, "0");
+}
+
+$currentCount = file_get_contents($counterFile);
+
+$newCount = $currentCount + 1;
+
+file_put_contents($counterFile, $newCount);
+?>
+
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-  <title>Time Table | 5th sem A section</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: cadetblue;
-    }
 
-    table {
-      width: 50%;
-    }
+    <title>Visitor Counter | vtucode</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f4f4f9;
+            color: #333;
+        }
 
-    th,
-    td {
-      border: 3px solid #02280e;
-      padding: 8px;
-    }
+        .container {
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin: 0 auto;
+            width: 60%;
+        }
 
-    th {
-      background: rgb(247, 238, 238);
-      color: rgb(198, 60, 60);
-    }
+        h1 {
+            font-size: 2.5em;
+            margin: 0;
+        }
 
-    tr:nth-child(even) {
-      background: rgb(212, 136, 136);
-    }
-
-    tr:nth-child(odd) {
-      background: rgb(145, 41, 41);
-    }
-
-    .highlight {
-      font-weight: bold;
-      color: rgb(37, 37, 141);
-    }
-
-    .highlight1 {
-      font-weight: bold;
-      color: rgb(40, 198, 79);
-    }
-
-    .highlight2 {
-      font-weight: bold;
-      color: rgb(218, 41, 218);
-    }
-  </style>
+        p {
+            font-size: 1.2em;
+            color: #555;
+        }
+    </style>
 </head>
 
 <body>
-  <h1 style="text-align:center;">Class time Table</h1>
-  <table>
-    <thead>
-      <tr>
-        <th>Day/Time</th>
-        <th>9:00 - 10:00</th>
-        <th>10:00 - 11:00</th>
-        <th>11:00 - 11:15</th>
-        <th>11:15 - 12:15</th>
-        <th>12:15 - 1:15</th>
-        <th>1:15 - 2:15</th>
-        <th>2:15 - 3:15</th>
-        <th>3:15 - 4:15</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Monday</td>
-        <td>CN</td>
-        <td>TOC</td>
-        <td rowspan="6" class="highlight2">T<br>e<br>a<br> B<br>r<br>e<br>a<br>k</td>
-        <td>Saturday</td>
-        <td>SE & PM</td>
-        <td rowspan="6" class="highlight1">L<br>u<br>n<br>c<br>h<br> B<br>r<br>e<br>a<br>k</td>
-        <td colspan="2" class="highlight2">Physical Activities</td>
-      </tr>
-      <tr>
-        <td>Tuesday</td>
-        <td>USP</td>
-        <td class="highlight">RM&IPR</td>
-        <td>SE & PM</td>
-        <td>TOC</td>
-        <td colspan="2" class="highlight1">Skill Lab</td>
-      </tr>
-      <tr>
-        <td>Wednesday</td>
-        <td>SE & PM</td>
-        <td>TOC</td>
-        <td class="highlight">RM&IPR</td>
-        <td>EVS Studies</td>
-        <td colspan="2" class="highlight1">CN Lab B2 / WT Lab B3</td>
-      </tr>
-      <tr>
-        <td>Thursday</td>
-        <td>SE & PM</td>
-        <td>CN</td>
-        <td>USP</td>
-        <td class="highlight">RM&IPR</td>
-        <td>Mini-Project Work</td>
-        <td>Library Slot / Remedial Class</td>
-      </tr>
-      <tr>
-        <td>Friday</td>
-        <td>USP</td>
-        <td class="highlight">RM&IPR</td>
-        <td>TOC</td>
-        <td>USP</td>
-        <td colspan="2" class="highlight1">CN Lab B3 / WT Lab B1</td>
-      </tr>
-      <tr>
-        <td>Saturday</td>
-        <td>SE & PM</td>
-        <td class="highlight">RM&IPR</td>
-        <td>TOC</td>
-        <td>USP</td>
-        <td>Remedial class</td>
-        <td>Library</td>
-      </tr>
-    </tbody>
-    <tfoot>
-      <tr>
-        <td colspan="9" class="highlight3">End of Timetable</td>
-      </tr>
-    </tfoot>
-  </table>
+    <div class="container">
+        <h1>Welcome to Our Website!</h1>
+        <p>You are visitor number: <strong><?php echo $newCount; ?></strong></p>
+    </div>
 </body>
 
 </html>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Records Sort</title>
+    <style>
+        table { border-collapse: collapse; width: 50%; margin: 20px auto; }
+        th, td { border: 1px solid #000; padding: 8px; text-align: center; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h2 style="text-align:center;">Sorted Student Records</h2>
+
+    <?php
+    // Database connection
+    $conn = new mysqli("localhost", "root", "", "studentdb");
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    // Fetch student records
+    $result = $conn->query("SELECT * FROM students");
+    $students = [];
+    while ($row = $result->fetch_assoc()) {
+        $students[] = $row;
+    }
+
+    // Selection sort by 'name'
+    $n = count($students);
+    for ($i = 0; $i < $n - 1; $i++) {
+        $min = $i;
+        for ($j = $i + 1; $j < $n; $j++) {
+            if (strcmp($students[$j]['name'], $students[$min]['name']) < 0) {
+                $min = $j;
+            }
+        }
+        // Swap
+        $temp = $students[$i];
+        $students[$i] = $students[$min];
+        $students[$min] = $temp;
+    }
+
+    // Display sorted table
+    echo "<table><tr><th>ID</th><th>Name</th><th>Marks</th></tr>";
+    foreach ($students as $s) {
+        echo "<tr><td>{$s['id']}</td><td>{$s['name']}</td><td>{$s['marks']}</td></tr>";
+    }
+    echo "</table>";
+
+    $conn->close();
+    ?>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Short CSS Demo</title>
+<style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: #f5f5f5;
+  }
+  .box {
+    width: 120px;   /* needed for animation */
+    height: 80px;
+    background: blue;
+    color: #fff;
+    margin: 10px auto;
+    text-align: center;
+    line-height: 80px;
+  }
+  button {
+    padding: 6px 12px;
+    background: #17afbd;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+  <div>
+    <p id="paragraph">This is an existing paragraph.</p>
+    <ul id="list">
+      <li>List item 1</li>
+      <li>List item 2</li>
+    </ul>
+    <div id="box" class="box">Animate me!</div>
+    <button id="appendButton">Append Content</button>
+    <button id="animateButton">Animate Box</button>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+
+    
+    $(function () {
+      $("#appendButton").click(function () {
+        $("#paragraph").append(" Appended text."); 
+        $("#list").append("<li>New appended list item</li>");
+      });
+
+
+      $("#animateButton").click(function () {
+        $("#box").animate(
+          { width: "150px", height: "150px", opacity: 0.7 },
+          800,
+          function () { 
+            $(this).css("background-color", "yellow"); }
+        );
+      });
+    });
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ajax Demo</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      padding: 30px;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      color: #444;
+    }
+    button {
+      margin: 10px 5px;
+      padding: 10px 15px;
+      font-size: 14px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    div[id^="out"] {
+      margin-top: 10px;
+      padding: 10px;
+      background: #c88888;
+      border: 5px dashed #a4a1e4;
+      border-radius: 4px;
+      min-height: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Ajax Demo</h1>
+
+<button id="b1">No jQuery</button>
+<button id="b2">With jQuery</button>
+<button id="b3">getJSON()</button>
+<button id="b4">parseJSON()</button>
+
+<div id="out1"></div>
+<div id="out2"></div>
+<div id="out3"></div>
+<div id="out4"></div>
+
+<script>
+const o1 = document.getElementById('out1');
+const o2 = document.getElementById('out2');
+const o3 = document.getElementById('out3');
+const o4 = document.getElementById('out4');
+
+document.getElementById('b1').onclick = function() {
+  const x = new XMLHttpRequest();
+  x.open("GET", "textfile.txt");
+  x.onload = function() { o1.textContent = x.responseText; };
+  x.send();
+};
+
+document.getElementById('b2').onclick = function() {
+  $.ajax({ url: "textfile.txt",
+   success: function(r){
+     o2.textContent = r; } });
+};
+
+document.getElementById('b3').onclick = function() {
+  $.getJSON("data.json", function(d){
+    o3.textContent = d.name + ", " + d.age + ", " + d.city;
+  });
+};
+
+document.getElementById('b4').onclick = function() {
+  $.ajax({
+    url: "data.json",
+    dataType: "text",
+    success: function(r){
+      const d = $.parseJSON(r);
+      o4.textContent = "{"+d.name + ", " + d.age + ", " + d.city;
+    }
+  });
+};
+</script>
+
+</body>
+</html>
+
+
