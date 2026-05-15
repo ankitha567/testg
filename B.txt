@@ -25,4 +25,75 @@ nano playbookname.yml
 
 
 
+Maven Project Setup Notes
+
+1. Devproj folder
+
+2. Check installations  
+   - Maven, Gradle, JDK  
+
+3. Launch Eclipse  
+   - File → New → Maven Project → Next  
+   - Catalog: All Catalog  
+   - Filter: org.maven-archetype-quickstart 1.1  
+   - Group ID (GID): com.pg2  
+   - Artifact ID (AID): pg2  
+   - Finish  
+
+4. Console Output  
+   - Should show: Build Success  
+
+5. Project structure  
+   - pg2 → src/main/java/  
+
+6. Run Maven build  
+   - Right-click folder → Run As → Maven Build  
+   - Goals: package → Apply → Run  
+   - Output: Tests Build Success  
+
+7. Java Program  
+   - Pg → APP.java (in source folder)  
+   - Save → Run As → Java Project  
+   - Output: "Hello World"  
+
+8. pom.xml  
+   - Run As → (Maven build option
+
+Setting up Maven from ZIP on Windows
+
+1. Extract the ZIP
+   - Unzip the Maven folder to a location like:  
+     C:\Program Files\Apache\Maven  
+     (or any directory you prefer).
+
+2. Set Environment Variables
+   - Press Win + R, type sysdm.cpl, and hit Enter.  
+   - Go to Advanced → Environment Variables.  
+   - Under System Variables, click New:  
+     - Variable name: MAVEN_HOME  
+     - Variable value: C:\Program Files\Apache\Maven (your extracted folder path).  
+   - Edit the Path variable → Add:  
+     `
+     %MAVEN_HOME%\bin
+     `
+
+3. Verify Java
+   - Make sure JDK is installed and JAVA_HOME is set.  
+   - Check with:  
+     `bash
+     java -version
+     `
+
+4. Verify Maven
+   - Open Command Prompt and run:  
+     `bash
+     mvn -v
+     `  
+   - You should see Maven version, Java version, and OS details
+
+
+
+
+
+
 
