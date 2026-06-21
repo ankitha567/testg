@@ -24,7 +24,7 @@ nano playbookname.yml
 
 
 
-
+2.-------------------------------------------------
 Maven Project Setup Notes
 
 1. Devproj folder
@@ -59,6 +59,8 @@ Maven Project Setup Notes
 8. pom.xml  
    - Run As → (Maven build option
 
+
+1.)---------------------------------------------------------
 Setting up Maven from ZIP on Windows
 
 1. Extract the ZIP
@@ -90,6 +92,110 @@ Setting up Maven from ZIP on Windows
      mvn -v
      `  
    - You should see Maven version, Java version, and OS details
+Main Content
+1) Devsoft
+extract all → folder → bin files
+
+copy folder
+
+C drive prg files copy
+
+Open bin file
+
+2) Env var
+under
+
+Mvn version 2nd one → (diagram of two boxes)
+
+VAR NAME: MAVEN_HOME
+
+path of bin '; VAR'
+
+3) path [search in sys var]
+click new → same path
+
+mvn -version
+
+4)
+(Cut off at the bottom right corner)
+
+3 -----------------------------------------
+(Continued Setup)cmd prompt
+mkdir pg3
+cd pg3
+gradle init
+$\rightarrow$ ~~select
+1. App~~~~Implementation~~ select 1. Application
+Implement 3. groovy
+Java version :
+-Proj name :
+grad latest
+app structure : 1. single application
+domain build : 1. kotlin 
+$\rightarrow$ yes
+~~Build sucess~~
+gradlew run 
+tree
+
+4--------------------------------------------------
+Section 4 (Experiment Steps)
+1) Create Maven proj
+$\rightarrow$ full step
+App.java $\rightarrow$ runRC (Right Click) $\rightarrow$ show local terminalgradle inityes
+2. groovy (select) yes~~Build success~~
+2) gradle buildApp.java 
+$\rightarrow$ do changesConfiguration & CommandsGo to target $\rightarrow$
+build.gradle $\rightarrow$ add 2 lines:
+id 'application'
+5application { mainClass = App.java }// copy package name of App.java & pasteApp.java rungradle cleangradle buildgradle run $\rightarrow$ (Build success)
+
+cmd propmt gradle clean
+gradle build
+gradle run
+
+8--------------------------------
+mkdir mt
+
+cd mt
+
+mvn archetype:generate \
+  -DgroupId=com.sara \
+  -DartifactId=gsss \
+  -DarchetypeArtifactId=maven-archetype-quickstart \
+  -DinteractiveMode=false
+
+mvn archetype:generate -DgroupId=com.sara -DartifactId=gsss -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+
+git init
+
+git add .
+
+git commit -m "first"
+
+git branch -M main
+
+[create repository public copy url]
+
+git remote add origin https://... .git
+
+git push -u origin main
+
+6--------------------------------------------------------------------
+Section 6 (Jenkins Configuration)1) chrome $\rightarrow$ localhost:8080 $\rightarrow$ login
+2) manage jenkins $\rightarrow$ ~~Tools maven version select~~name: Maven_Home $\rightarrow$ Version $\rightarrow$ save
+3) Available Plugins $\rightarrow$ Maven Integration $\rightarrow$ select install
+4) Dashboard $\rightarrow$ 
+New Item $\rightarrow$ [pg6] 
+select freestyle  Build Steps $\rightarrow$ 
+Add Build step $\rightarrow$ 
+Invoke top-level Maven targetsmaven: Home clean install
+Advance $\rightarrow$ POM.XML
+$\rightarrow$ pg2 propertiessaveExecutionBuild Now$\rightarrow$ 
+check mark $\rightarrow$ console output (with a small note on the side: git to repository click)
+
+type "C:\Program Files\Jenkins\jenkins.home\secrets\initialAdminPassword"
+---------------------------------------------------------------------------
+
 
 
 
