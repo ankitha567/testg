@@ -1,200 +1,84 @@
----
-- name: create a directory
-  hosts: localhost
-  gather_facts: false
-  tasks:
-    - name: create the 'my_test_directory'
-      ansible.builtin.file:
-        path: /tmp/my_test_directory
-        state: directory
-sudo adduser anna
-sudo apt update
-sudo apt install ansible -y
-vi inventory.ini
-localhost ansible_connection=local
-esc :wq
-ansible-inventory -i inventory.ini --list
-ansible all -i inventory.ini -m ping
-nano playbookname.yml
-//code 1
-save co enter cx
-ansible-playbook -i inventory.ini playbookname.yml
-nano playbookname.yml
+import numpy as np, seaborn as sns, matplotlib.pyplot as plt
+from sklearn.datasets import fetch_california_housing
 
+# Load dataset
+df = fetch_california_housing(as_frame=True).frame
+num_features = df.select_dtypes('number').columns
 
+# Histograms
+plt.figure(figsize=(15,10))
+for i,f in enumerate(num_features,1):
+    plt.subplot(3,3,i)
+    sns.histplot(df[f], kde=True, bins=30, color='blue')
+    plt.title(f'Distribution of {f}')
+plt.tight_layout(); plt.show()
 
+# Boxplots
+plt.figure(figsize=(15,10))
+for i,f in enumerate(num_features,1):
+    plt.subplot(3,3,i)
+    sns.boxplot(x=df[f], color='orange')
+    plt.title(f'Box Plot of {f}')
+plt.tight_layout(); plt.show()
 
-2.-------------------------------------------------
-Maven Project Setup Notes
+# Outlier detection (IQR)
+print("Outliers Detection:")
+for f in num_features:
+    Q1,Q3 = df[f].quantile([.25,.75]); 
+    IQR=Q3-Q1
+    lb,ub = Q1-1.5*IQR, Q3+1.5*IQR
+    print(f"{f}: {((df[f]<lb)|(df[f]>ub)).sum()} outliers")
 
-1. Devproj folder
+# Summary
+print("\nDataset Summary:\n", df.describe())
+2------------------------------------------------------------
 
-2. Check installations  
-   - Maven, Gradle, JDK  
+# heatmap . Create a pair plot 
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+from sklearn.datasets import fetch_california_housing
 
-3. Launch Eclipse  
-   - File → New → Maven Project → Next  
-   - Catalog: All Catalog  
-   - Filter: org.maven-archetype-quickstart 1.1  
-   - Group ID (GID): com.pg2  
-   - Artifact ID (AID): pg2  
-   - Finish  
+# Load dataset
+data = fetch_california_housing(as_frame=True).frame
 
-4. Console Output  
-   - Should show: Build Success  
+# Correlation heatmap
+plt.figure(figsize=(10, 8))
+sns.heatmap(data.corr(), annot=True, cmap='plasma', fmt='.2f', linewidths=0.5)
+plt.title('Correlation Matrix')
+plt.show()
 
-5. Project structure  
-   - pg2 → src/main/java/  
+# Pair plot
+sns.pairplot(data, diag_kind='kde', plot_kws={'alpha': 0.5})
+plt.suptitle('Pair Plot of Features', y=1.02)
+plt.show()
+3-----------------------------------------------------------
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.datasets import load_iris
+from sklearn.decomposition import PCA
 
-6. Run Maven build  
-   - Right-click folder → Run As → Maven Build  
-   - Goals: package → Apply → Run  
-   - Output: Tests Build Success  
+# Load data
+iris = load_iris()
+X, y, names = iris.data, iris.target, iris.target_names
 
-7. Java Program  
-   - Pg → APP.java (in source folder)  
-   - Save → Run As → Java Project  
-   - Output: "Hello World"  
+# PCA to 2D
+pca = PCA(2)
+X_reduced = pca.fit_transform(X)
 
-8. pom.xml  
-   - Run As → (Maven build option
-
-
-1.)---------------------------------------------------------
-Setting up Maven from ZIP on Windows
-
-1. Extract the ZIP
-   - Unzip the Maven folder to a location like:  
-     C:\Program Files\Apache\Maven  
-     (or any directory you prefer).
-
-2. Set Environment Variables
-   - Press Win + R, type sysdm.cpl, and hit Enter.  
-   - Go to Advanced → Environment Variables.  
-   - Under System Variables, click New:  
-     - Variable name: MAVEN_HOME  
-     - Variable value: C:\Program Files\Apache\Maven (your extracted folder path).  
-   - Edit the Path variable → Add:  
-     `
-     %MAVEN_HOME%\bin
-     `
-
-3. Verify Java
-   - Make sure JDK is installed and JAVA_HOME is set.  
-   - Check with:  
-     `bash
-     java -version
-     `
-
-4. Verify Maven
-   - Open Command Prompt and run:  
-     `bash
-     mvn -v
-     `  
-   - You should see Maven version, Java version, and OS details
-Main Content
-1) Devsoft
-extract all → folder → bin files
-
-copy folder
-
-C drive prg files copy
-
-Open bin file
-
-2) Env var
-under
-
-Mvn version 2nd one → (diagram of two boxes)
-
-VAR NAME: MAVEN_HOME
-
-path of bin '; VAR'
-
-3) path [search in sys var]
-click new → same path
-
-mvn -version
-
-4)
-(Cut off at the bottom right corner)
-
-3 -----------------------------------------
-(Continued Setup)cmd prompt
-mkdir pg3
-cd pg3
-gradle init
-$\rightarrow$ ~~select
-1. App~~~~Implementation~~ select 1. Application
-Implement 3. groovy
-Java version :
--Proj name :
-grad latest
-app structure : 1. single application
-domain build : 1. kotlin 
-$\rightarrow$ yes
-~~Build sucess~~
-gradlew run 
-tree
+# Plot
+colors = ['r','g','b']
+for i, label in enumerate(np.unique(y)):
+    plt.scatter(X_reduced[y==label,0],
+                X_reduced[y==label,1],
+                c=colors[i],
+                label=names[label])
+plt.title('PCA on Iris Dataset')
+plt.xlabel('PC1'); plt.ylabel('PC2')
+plt.legend(); plt.grid(); plt.show()
 
 4--------------------------------------------------
-Section 4 (Experiment Steps)
-1) Create Maven proj
-$\rightarrow$ full step
-App.java $\rightarrow$ runRC (Right Click) $\rightarrow$ show local terminalgradle inityes
-2. groovy (select) yes~~Build success~~
-2) gradle buildApp.java 
-$\rightarrow$ do changesConfiguration & CommandsGo to target $\rightarrow$
-build.gradle $\rightarrow$ add 2 lines:
-id 'application'
-5application { mainClass = App.java }// copy package name of App.java & pasteApp.java rungradle cleangradle buildgradle run $\rightarrow$ (Build success)
-
-cmd propmt gradle clean
-gradle build
-gradle run
-
-8--------------------------------
-mkdir mt
-
-cd mt
-
-mvn archetype:generate \
-  -DgroupId=com.sara \
-  -DartifactId=gsss \
-  -DarchetypeArtifactId=maven-archetype-quickstart \
-  -DinteractiveMode=false
-
-mvn archetype:generate -DgroupId=com.sara -DartifactId=gsss -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
-
-git init
-
-git add .
-
-git commit -m "first"
-
-git branch -M main
-
-[create repository public copy url]
-
-git remote add origin https://... .git
-
-git push -u origin main
-
-6--------------------------------------------------------------------
-Section 6 (Jenkins Configuration)1) chrome $\rightarrow$ localhost:8080 $\rightarrow$ login
-2) manage jenkins $\rightarrow$ ~~Tools maven version select~~name: Maven_Home $\rightarrow$ Version $\rightarrow$ save
-3) Available Plugins $\rightarrow$ Maven Integration $\rightarrow$ select install
-4) Dashboard $\rightarrow$ 
-New Item $\rightarrow$ [pg6] 
-select freestyle  Build Steps $\rightarrow$ 
-Add Build step $\rightarrow$ 
-Invoke top-level Maven targetsmaven: Home clean install
-Advance $\rightarrow$ POM.XML
-$\rightarrow$ pg2 propertiessaveExecutionBuild Now$\rightarrow$ 
-check mark $\rightarrow$ console output (with a small note on the side: git to repository click)
-
-type "C:\Program Files\Jenkins\jenkins.home\secrets\initialAdminPassword"
----------------------------------------------------------------------------
 
 
 
@@ -203,3 +87,144 @@ type "C:\Program Files\Jenkins\jenkins.home\secrets\initialAdminPassword"
 
 
 
+import pandas as pd
+
+def find_s(file):
+    data = pd.read_csv(file)
+    print("Training data:\n", data)
+
+
+
+    hypo = ['?'] * (len(data.columns)-1)
+
+    for _, row in data.iterrows():
+        if row.iloc[-1] == 'Yes':   # check target column
+            for i, val in enumerate(row[:-1]):
+                hypo[i] = val if hypo[i] in ['?', val] else '?'
+    return hypo
+
+# ✅ Path to your CSV
+print("Final Hypothesis:", find_s(r"C:\Users\Lenovo\Downloads\training_data.csv"))
+
+Training data:
+     Outlook Temperature Humidity  Windy PlayTennis
+0     Sunny         Hot     High  False         No
+1     Sunny         Hot     High   True         No
+2  Overcast         Hot     High  False        Yes
+3      Rain        Cold     High  False        Yes
+4      Rain        Cold     High   True         No
+5  Overcast         Hot     High   True        Yes
+6     Sunny         Hot     High  False         No
+Final Hypothesis: ['Overcast', 'Hot', 'High', '?']
+
+6--------------------------------------------------------------
+
+import numpy as np, matplotlib.pyplot as plt
+
+def gaussian_kernel(x, xi, tau): 
+    return np.exp(-np.sum((x - xi)**2)/(2*tau**2))
+
+def lwr(x, X, y, tau):
+    W = np.diag([gaussian_kernel(x, X[i], tau) for i in range(len(X))])
+    theta = np.linalg.inv(X.T @ W @ X) @ (X.T @ W @ y)
+    return x @ theta
+
+# Data
+np.random.seed(42)
+X = np.linspace(0, 2*np.pi, 100); y = np.sin(X)+0.1*np.random.randn(100)
+Xb = np.c_[np.ones(len(X)), X]
+
+# Predictions
+xt = np.linspace(0, 2*np.pi, 200); xtb = np.c_[np.ones(len(xt)), xt]
+tau = 0.5
+yp = np.array([lwr(xi, Xb, y, tau) for xi in xtb])
+
+# Plot
+plt.scatter(X, y, c='r', alpha=0.7, label='Training Data')
+plt.plot(xt, yp, 'b', lw=2, label=f'LWR Fit (tau={tau})')
+plt.xlabel('X'); plt.ylabel('y'); plt.title('Locally Weighted Regression')
+plt.legend(); plt.grid(alpha=0.3); plt.show()
+
+-----------------------------------------------------------------------------------
+#8
+import numpy as np, matplotlib.pyplot as plt
+from sklearn.datasets import load_breast_cancer
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier, plot_tree
+from sklearn.metrics import accuracy_score
+
+# Load data
+data = load_breast_cancer()
+X_train, X_test, y_train, y_test = train_test_split(data.data, data.target, test_size=0.2, random_state=42)
+
+# Train model
+clf = DecisionTreeClassifier(random_state=42).fit(X_train, y_train)
+y_pred = clf.predict(X_test)
+
+# Accuracy
+print(f"Model Accuracy: {accuracy_score(y_test, y_pred)*100:.2f}%")
+
+# Predict new sample
+pred = clf.predict([X_test[0]])[0]
+print("Predicted Class for the new sample:", "Benign" if pred==1 else "Malignant")
+
+# Plot tree
+plt.figure(figsize=(12,8))
+plot_tree(clf, filled=True, feature_names=data.feature_names, class_names=data.target_names)
+plt.title("Decision Tree - Breast Cancer Dataset")
+plt.show()
+
+9---------------------------------------------------------------
+import matplotlib.pyplot as plt
+from sklearn.datasets import fetch_olivetti_faces
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import GaussianNB
+
+# Load data
+data = fetch_olivetti_faces(shuffle=True, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(data.data, data.target, test_size=0.3, random_state=42)
+
+# Train & predict
+model = GaussianNB().fit(X_train, y_train)
+y_pred = model.predict(X_test)
+
+print("Accuracy:", (y_pred == y_test).mean()*100)
+
+# Show 4 predictions
+fig, axes = plt.subplots(1, 4, figsize=(8, 3))
+for ax, img, true, pred in zip(axes, X_test[:4], y_test[:4], y_pred[:4]):
+    ax.imshow(img.reshape(64,64), cmap="gray")
+    ax.set_title(f"T:{true},P:{pred}")
+    ax.axis("off")
+plt.show()
+10------------------------------------------------------------------
+import matplotlib.pyplot as plt, seaborn as sns
+from sklearn.cluster import KMeans
+from sklearn.datasets import load_breast_cancer
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import classification_report
+
+# Load & scale data
+data = load_breast_cancer()
+X = StandardScaler().fit_transform(data.data)
+
+# K-Means clustering
+kmeans = KMeans(n_clusters=2, random_state=42).fit(X)
+y_kmeans = kmeans.labels_
+print("Classification Report:\n", classification_report(data.target, y_kmeans))
+
+# PCA for 2D visualization
+X_pca = PCA(n_components=2).fit_transform(X)
+centroids = PCA(n_components=2).fit(X).transform(kmeans.cluster_centers_)
+
+# Plot clusters vs true labels
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12,5))
+sns.scatterplot(x=X_pca[:,0], y=X_pca[:,1], hue=y_kmeans, palette="Set1", ax=ax1)
+ax1.scatter(centroids[:,0], centroids[:,1], c="black", s=200, marker="X")
+ax1.set_title("K-Means Clusters")
+
+sns.scatterplot(x=X_pca[:,0], y=X_pca[:,1], hue=data.target, palette="coolwarm", ax=ax2)
+ax2.set_title("True Labels")
+plt.show()
+---------------------------------------------------------------------------------------
