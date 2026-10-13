@@ -1,230 +1,95 @@
-import numpy as np, seaborn as sns, matplotlib.pyplot as plt
-from sklearn.datasets import fetch_california_housing
+#include <stdio.h>
+#include <math.h>
+#include <omp.h>
 
-# Load dataset
-df = fetch_california_housing(as_frame=True).frame
-num_features = df.select_dtypes('number').columns
+int is_prime(int n) {
+    if (n < 2) return 0;
+    for (int i = 2; i <= sqrt(n); i++)
+        if (n % i == 0) return 0;
+    return 1;
+}
 
-# Histograms
-plt.figure(figsize=(15,10))
-for i,f in enumerate(num_features,1):
-    plt.subplot(3,3,i)
-    sns.histplot(df[f], kde=True, bins=30, color='blue')
-    plt.title(f'Distribution of {f}')
-plt.tight_layout(); plt.show()
+int main() {
+    int n, c = 0;
+    printf("Enter the value of n: ");
+    scanf("%d", &n);
 
-# Boxplots
-plt.figure(figsize=(15,10))
-for i,f in enumerate(num_features,1):
-    plt.subplot(3,3,i)
-    sns.boxplot(x=df[f], color='orange')
-    plt.title(f'Box Plot of {f}')
-plt.tight_layout(); plt.show()
+    printf("\nPrime numbers from 1 to %d:\n", n);
+    for (int i = 1; i <= n; i++)
+        if (is_prime(i)) printf("%d ", i);
 
-# Outlier detection (IQR)
-print("Outliers Detection:")
-for f in num_features:
-    Q1,Q3 = df[f].quantile([.25,.75]); 
-    IQR=Q3-Q1
-    lb,ub = Q1-1.5*IQR, Q3+1.5*IQR
-    print(f"{f}: {((df[f]<lb)|(df[f]>ub)).sum()} outliers")
+    double t = omp_get_wtime();
+    for (int i = 1; i <= n; i++) c += is_prime(i);
+    printf("\nSerial Time: %f seconds\n", omp_get_wtime() - t);
 
-# Summary
-print("\nDataset Summary:\n", df.describe())
-2------------------------------------------------------------
-
-# heatmap . Create a pair plot 
-import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
-from sklearn.datasets import fetch_california_housing
-
-# Load dataset
-data = fetch_california_housing(as_frame=True).frame
-
-# Correlation heatmap
-plt.figure(figsize=(10, 8))
-sns.heatmap(data.corr(), annot=True, cmap='plasma', fmt='.2f', linewidths=0.5)
-plt.title('Correlation Matrix')
-plt.show()
-
-# Pair plot
-sns.pairplot(data, diag_kind='kde', plot_kws={'alpha': 0.5})
-plt.suptitle('Pair Plot of Features', y=1.02)
-plt.show()
-3-----------------------------------------------------------
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-from sklearn.datasets import load_iris
-from sklearn.decomposition import PCA
-
-# Load data
-iris = load_iris()
-X, y, names = iris.data, iris.target, iris.target_names
-
-# PCA to 2D
-pca = PCA(2)
-X_reduced = pca.fit_transform(X)
-
-# Plot
-colors = ['r','g','b']
-for i, label in enumerate(np.unique(y)):
-    plt.scatter(X_reduced[y==label,0],
-                X_reduced[y==label,1],
-                c=colors[i],
-                label=names[label])
-plt.title('PCA on Iris Dataset')
-plt.xlabel('PC1'); plt.ylabel('PC2')
-plt.legend(); plt.grid(); plt.show()
-
-4--------------------------------------------------
+    t = omp_get_wtime();
+    #pragma omp parallel for reduction(+:c)
+    for (int i = 1; i <= n; i++) c += is_prime(i);
+    printf("Parallel Time: %f seconds\n", omp_get_wtime() - t);
+    return 0;
+}
+gedit prg4.c
+gcc -fopenmp prg4.c -o prg4 -lm
+export OMP_NUM_THREADS=4 && ./prg4
 
 
 
 
+#include <mpi.h>
+#include <stdio.h>
 
+#define DEADLOCK_PART 2   // 1 = deadlock, 2 = deadlock avoidance
 
+int main(int argc, char *argv[]) {
+    int rank, size, num = 123;
+    MPI_Init(&argc, &argv);
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    MPI_Comm_size(MPI_COMM_WORLD, &size);
 
+    if (size < 2) {
+        if (rank == 0) printf("Run with at least 2 processes.\n");
+        MPI_Finalize();
+        return 0;
+    }
 
-import pandas as pd
+    int other = 1 - rank;   // partner process (0 <-> 1)
 
-def find_s(file):
-    data = pd.read_csv(file)
-    print("Training data:\n", data)
+#if DEADLOCK_PART == 1
+    // Both processes receive first -> deadlock
+    if (rank < 2) {
+        printf("Process %d waiting to receive from Process %d...\n", rank, other);
+        MPI_Recv(&num, 1, MPI_INT, other, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        MPI_Send(&num, 1, MPI_INT, other, 0, MPI_COMM_WORLD);
+    }
+#else
+    // Process 0 sends first, Process 1 receives first -> no deadlock
+    if (rank == 0) {
+        MPI_Send(&num, 1, MPI_INT, 1, 0, MPI_COMM_WORLD);
+        MPI_Recv(&num, 1, MPI_INT, 1, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        printf("Process 0 received back number: %d\n", num);
+    } else if (rank == 1) {
+        MPI_Recv(&num, 1, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        MPI_Send(&num, 1, MPI_INT, 0, 0, MPI_COMM_WORLD);
+        printf("Process 1 received and sent back number: %d\n", num);
+    }
+#endif
 
+    MPI_Finalize();
+    return 0;
+}
 
+mpicc prg6.c -o prg6
+mpirun -np 2 ./prg6
+Process 0 waiting to receive from Process 1...
+Process 1 waiting to receive from Process 0...
+Process 1 received and sent back number: 123
+Process 0 received back number: 123
+$ gedit prg4.c
+$ gcc -fopenmp prg4.c -o prg4 -lm
+$ export OMP_NUM_THREADS=4 && ./prg4
+Enter the value of n: 200
 
-    hypo = ['?'] * (len(data.columns)-1)
-
-    for _, row in data.iterrows():
-        if row.iloc[-1] == 'Yes':   # check target column
-            for i, val in enumerate(row[:-1]):
-                hypo[i] = val if hypo[i] in ['?', val] else '?'
-    return hypo
-
-# ✅ Path to your CSV
-print("Final Hypothesis:", find_s(r"C:\Users\Lenovo\Downloads\training_data.csv"))
-
-Training data:
-     Outlook Temperature Humidity  Windy PlayTennis
-0     Sunny         Hot     High  False         No
-1     Sunny         Hot     High   True         No
-2  Overcast         Hot     High  False        Yes
-3      Rain        Cold     High  False        Yes
-4      Rain        Cold     High   True         No
-5  Overcast         Hot     High   True        Yes
-6     Sunny         Hot     High  False         No
-Final Hypothesis: ['Overcast', 'Hot', 'High', '?']
-
-6--------------------------------------------------------------
-
-import numpy as np, matplotlib.pyplot as plt
-
-def gaussian_kernel(x, xi, tau): 
-    return np.exp(-np.sum((x - xi)**2)/(2*tau**2))
-
-def lwr(x, X, y, tau):
-    W = np.diag([gaussian_kernel(x, X[i], tau) for i in range(len(X))])
-    theta = np.linalg.inv(X.T @ W @ X) @ (X.T @ W @ y)
-    return x @ theta
-
-# Data
-np.random.seed(42)
-X = np.linspace(0, 2*np.pi, 100); y = np.sin(X)+0.1*np.random.randn(100)
-Xb = np.c_[np.ones(len(X)), X]
-
-# Predictions
-xt = np.linspace(0, 2*np.pi, 200); xtb = np.c_[np.ones(len(xt)), xt]
-tau = 0.5
-yp = np.array([lwr(xi, Xb, y, tau) for xi in xtb])
-
-# Plot
-plt.scatter(X, y, c='r', alpha=0.7, label='Training Data')
-plt.plot(xt, yp, 'b', lw=2, label=f'LWR Fit (tau={tau})')
-plt.xlabel('X'); plt.ylabel('y'); plt.title('Locally Weighted Regression')
-plt.legend(); plt.grid(alpha=0.3); plt.show()
-
------------------------------------------------------------------------------------
-#8
-import numpy as np, matplotlib.pyplot as plt
-from sklearn.datasets import load_breast_cancer
-from sklearn.model_selection import train_test_split
-from sklearn.tree import DecisionTreeClassifier, plot_tree
-from sklearn.metrics import accuracy_score
-
-# Load data
-data = load_breast_cancer()
-X_train, X_test, y_train, y_test = train_test_split(data.data, data.target, test_size=0.2, random_state=42)
-
-# Train model
-clf = DecisionTreeClassifier(random_state=42).fit(X_train, y_train)
-y_pred = clf.predict(X_test)
-
-# Accuracy
-print(f"Model Accuracy: {accuracy_score(y_test, y_pred)*100:.2f}%")
-
-# Predict new sample
-pred = clf.predict([X_test[0]])[0]
-print("Predicted Class for the new sample:", "Benign" if pred==1 else "Malignant")
-
-# Plot tree
-plt.figure(figsize=(12,8))
-plot_tree(clf, filled=True, feature_names=data.feature_names, class_names=data.target_names)
-plt.title("Decision Tree - Breast Cancer Dataset")
-plt.show()
-
-9---------------------------------------------------------------
-import matplotlib.pyplot as plt
-from sklearn.datasets import fetch_olivetti_faces
-from sklearn.model_selection import train_test_split
-from sklearn.naive_bayes import GaussianNB
-
-# Load data
-data = fetch_olivetti_faces(shuffle=True, random_state=42)
-X_train, X_test, y_train, y_test = train_test_split(data.data, data.target, test_size=0.3, random_state=42)
-
-# Train & predict
-model = GaussianNB().fit(X_train, y_train)
-y_pred = model.predict(X_test)
-
-print("Accuracy:", (y_pred == y_test).mean()*100)
-
-# Show 4 predictions
-fig, axes = plt.subplots(1, 4, figsize=(8, 3))
-for ax, img, true, pred in zip(axes, X_test[:4], y_test[:4], y_pred[:4]):
-    ax.imshow(img.reshape(64,64), cmap="gray")
-    ax.set_title(f"T:{true},P:{pred}")
-    ax.axis("off")
-plt.show()
-10------------------------------------------------------------------
-import matplotlib.pyplot as plt, seaborn as sns
-from sklearn.cluster import KMeans
-from sklearn.datasets import load_breast_cancer
-from sklearn.decomposition import PCA
-from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import classification_report
-
-# Load & scale data
-data = load_breast_cancer()
-X = StandardScaler().fit_transform(data.data)
-
-# K-Means clustering
-kmeans = KMeans(n_clusters=2, random_state=42).fit(X)
-y_kmeans = kmeans.labels_
-print("Classification Report:\n", classification_report(data.target, y_kmeans))
-
-# PCA for 2D visualization
-X_pca = PCA(n_components=2).fit_transform(X)
-centroids = PCA(n_components=2).fit(X).transform(kmeans.cluster_centers_)
-
-# Plot clusters vs true labels
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12,5))
-sns.scatterplot(x=X_pca[:,0], y=X_pca[:,1], hue=y_kmeans, palette="Set1", ax=ax1)
-ax1.scatter(centroids[:,0], centroids[:,1], c="black", s=200, marker="X")
-ax1.set_title("K-Means Clusters")
-
-sns.scatterplot(x=X_pca[:,0], y=X_pca[:,1], hue=data.target, palette="coolwarm", ax=ax2)
-ax2.set_title("True Labels")
-plt.show()
----------------------------------------------------------------------------------------
+Prime numbers from 1 to 200:
+2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 79 83 89 97 101 103 107 109 113 127 131 137 139 149 151 157 163 167 173 179 181 191 193 197 199 
+Serial Time: 0.000004 seconds
+Parallel Time: 0.000633 seconds
